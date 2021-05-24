@@ -1,4 +1,4 @@
-﻿@model CRUDEmpleados.Models.Entities.Empleado
+﻿@model CRUDEmpleados.ViewModels.EmpleadoViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -34,6 +34,13 @@
                 <input asp-for="Telefono" class="form-control" />
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Imagen" class="control-label"></label>
+                <br />
+                <input type="file" asp-for="Imagen" accept="image/*" />
+                <span asp-validation-for="Imagen" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>

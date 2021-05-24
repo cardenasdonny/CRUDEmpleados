@@ -54,6 +54,9 @@ namespace CRUDEmpleados.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("NombreEmpleado");
 
+                    b.Property<string>("RutaImagen")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 

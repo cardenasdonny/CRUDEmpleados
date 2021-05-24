@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -30,6 +31,11 @@ namespace CRUDEmpleados.Models.Entities
         public string Telefono { get; set; }
 
         public bool Estado { get; set; }
+
+        public string RutaImagen { get; set; }
+
+        [NotMapped]
+        public IFormFile Imagen { get; set; }
 
         public virtual Cargo Cargo { get; set; }
 

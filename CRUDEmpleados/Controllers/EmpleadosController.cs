@@ -1,5 +1,6 @@
 ﻿using CRUDEmpleados.Models.Abstract;
 using CRUDEmpleados.Models.Entities;
+using CRUDEmpleados.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace CRUDEmpleados.Controllers
         {
             if (id == 0)
             {
-                return View(new Empleado());
+                return View(new EmpleadoViewModel());
             }
             else
             {                

@@ -4,71 +4,105 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Empleados</h1>
-<br />
-<p>
-    <a asp-action="CrearEditarEmpleado" class="btn btn-success"><i class="fas fa-user-plus"></i> Crear nuevo</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Documento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CargoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.Nombre
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Documento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cargo.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Telefono)
-                </td>
-                <td>
-                    @if (item.Estado == true)
-                    {
-                    <span class="badge badge-success">Habilitado</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-danger">Deshabilitado</span>
-                   
+@section Styles{
 
-                    }
-                    
-                </td>
-                <td>
-                    <a class="text-success" asp-action="CrearEditarEmpleado" asp-route-id="@item.EmpleadoId"><i class="fas fa-user-edit"></i> Editar</a> |
-                    <a asp-action="DetalleEmpleado" asp-route-id="@item.EmpleadoId"><i class="fas fa-search-plus"></i> Detalle</a> |
+}
 
-                    <form asp-action="EliminarEmpleado" asp-route-id="@item.EmpleadoId" class="d-inline">
-                        <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn btn-danger"><i class="fas fa-user-minus"></i>Eliminar</button>
-                    </form>
 
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashboard</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Admin">Inicio</a></li>
+                    <li class="breadcrumb-item active">Empleados</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+
+
+        <br />
+        <p>
+            <a asp-action="CrearEditarEmpleado" class="btn btn-success"><i class="fas fa-user-plus"></i> Crear nuevo</a>
+        </p>
+        <table class="table" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Documento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CargoId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Nombre
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Documento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cargo.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td>
+                            @if (item.Estado == true)
+                            {
+                                <span class="badge badge-success">Habilitado</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">Deshabilitado</span>
+
+
+                            }
+
+                        </td>
+                        <td>
+                            <a class="text-success" asp-action="CrearEditarEmpleado" asp-route-id="@item.EmpleadoId"><i class="fas fa-user-edit"></i> Editar</a> |
+                            <a asp-action="DetalleEmpleado" asp-route-id="@item.EmpleadoId"><i class="fas fa-search-plus"></i> Detalle</a> |
+
+                            <form asp-action="EliminarEmpleado" asp-route-id="@item.EmpleadoId" class="d-inline">
+                                <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn btn-danger"><i class="fas fa-user-minus"></i>Eliminar</button>
+                            </form>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        </div>
+    </section>
+@section Scripts{
+
+    <script src="~/js/tabla.js"></script>
+
+}
+

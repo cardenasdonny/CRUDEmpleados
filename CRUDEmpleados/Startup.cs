@@ -67,7 +67,7 @@ namespace CRUDEmpleados
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Empleados}/{action=Index}/{id?}");
+                    pattern: "{controller=Admin}/{action=Dashboard}/{id?}");
             });
         }
     }
