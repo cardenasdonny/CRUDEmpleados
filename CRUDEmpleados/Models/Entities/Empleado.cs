@@ -32,10 +32,7 @@ namespace CRUDEmpleados.Models.Entities
 
         public bool Estado { get; set; }
 
-        public string RutaImagen { get; set; }
-
-        [NotMapped]
-        public IFormFile Imagen { get; set; }
+        public string RutaImagen { get; set; }      
 
         public virtual Cargo Cargo { get; set; }
 

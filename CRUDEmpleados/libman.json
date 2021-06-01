@@ -4,15 +4,15 @@
   "libraries": [
     {
       "library": "font-awesome@5.15.3",
-      "destination": "wwwroot/lib/font-awesome/",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "limonte-sweetalert2@10.16.6",
+      "destination": "wwwroot/lib/limonte-sweetalert2/",
       "files": [
-        "css/all.min.css"
+        "sweetalert2.min.css",
+        "sweetalert2.min.js"
       ]
     }
-  ,
-{
-  "library": "font-awesome@5.15.3",
-  "destination": "wwwroot/lib/font-awesome/"
-}
-]
+  ]
 }

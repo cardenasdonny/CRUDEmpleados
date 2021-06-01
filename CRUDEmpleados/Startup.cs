@@ -35,7 +35,8 @@ namespace CRUDEmpleados
                     options.UseSqlServer(conexion));
 
             services.AddScoped<IEmpleadoService, EmpleadoService>();
-           
+            services.AddScoped<ICargoService, CargoService>();
+
 
             /*
             var conexion = Configuration["ConnectionStrings:conexion_MySQL"];

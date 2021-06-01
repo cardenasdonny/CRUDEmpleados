@@ -104,5 +104,42 @@
 
     <script src="~/js/tabla.js"></script>
 
+    <script>
+
+         @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarEmpleado")) { <text>
+
+                  Swal.fire({
+                    title: "Guardar empleado",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarEmpleado")) { <text>
+
+                  Swal.fire({
+                    title: "Editar empleado",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
+
+                  Swal.fire({
+                    title: "Error",
+                      icon: 'error',
+                    html: "@TempData["Mensaje"]"
+                  });
+
+                 </text>
+        }
+
+    </script>
+
 }
 

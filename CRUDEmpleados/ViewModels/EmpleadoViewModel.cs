@@ -32,6 +32,8 @@ namespace CRUDEmpleados.ViewModels
         public bool Estado { get; set; }
         
         public IFormFile Imagen { get; set; }
-        
+
+        public string RutaImagen { get; set; }
+
     }
 }

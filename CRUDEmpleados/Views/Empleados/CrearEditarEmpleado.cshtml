@@ -10,9 +10,11 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CrearEditarEmpleado" asp-route-id="@Model.EmpleadoId">
+        <form asp-action="CrearEditarEmpleado" asp-route-id="@Model.EmpleadoId" enctype="multipart/form-data">
             <input type="hidden" asp-for="EmpleadoId" />
             <input type="hidden" asp-for="Estado" />
+            <input type="hidden" asp-for="RutaImagen" />
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
@@ -26,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CargoId" class="control-label"></label>
-                <input asp-for="CargoId" class="form-control" />
+                <select asp-items="ViewBag.ListaCargos" asp-for="CargoId" class="form-control"></select>
                 <span asp-validation-for="CargoId" class="text-danger"></span>
             </div>
             <div class="form-group">

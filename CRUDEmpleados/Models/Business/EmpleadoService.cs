@@ -21,7 +21,7 @@ namespace CRUDEmpleados.Models.Business
         public async Task<IEnumerable<Empleado>> ObtenerListaTodosEmpleados()
         {
             return await _context.Empleados.Include(x=>x.Cargo).OrderByDescending(i=>i.EmpleadoId).ToListAsync();
-        }
+        }        
 
         public async Task<Empleado> ObtenerEmpleadoPorId(int id)
         {
