@@ -15,6 +15,13 @@ namespace CRUDEmpleados.Models.DAL
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Seed();
+        }
+
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Cargo> Cargos { get; set; }
 

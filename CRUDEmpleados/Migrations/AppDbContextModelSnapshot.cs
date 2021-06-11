@@ -31,6 +31,23 @@ namespace CRUDEmpleados.Migrations
                     b.HasKey("CargoId");
 
                     b.ToTable("Cargos");
+
+                    b.HasData(
+                        new
+                        {
+                            CargoId = 1,
+                            Nombre = "Secretaria"
+                        },
+                        new
+                        {
+                            CargoId = 2,
+                            Nombre = "Gerente"
+                        },
+                        new
+                        {
+                            CargoId = 3,
+                            Nombre = "Contador"
+                        });
                 });
 
             modelBuilder.Entity("CRUDEmpleados.Models.Entities.Empleado", b =>
@@ -65,6 +82,35 @@ namespace CRUDEmpleados.Migrations
                     b.HasIndex("CargoId");
 
                     b.ToTable("Empleados");
+
+                    b.HasData(
+                        new
+                        {
+                            EmpleadoId = 1,
+                            CargoId = 1,
+                            Documento = 661122,
+                            Estado = true,
+                            Nombre = "Luisa",
+                            Telefono = "554433"
+                        },
+                        new
+                        {
+                            EmpleadoId = 2,
+                            CargoId = 3,
+                            Documento = 12345,
+                            Estado = true,
+                            Nombre = "Juan",
+                            Telefono = "445566"
+                        },
+                        new
+                        {
+                            EmpleadoId = 3,
+                            CargoId = 3,
+                            Documento = 229911,
+                            Estado = true,
+                            Nombre = "Daniel",
+                            Telefono = "885566"
+                        });
                 });
 
             modelBuilder.Entity("CRUDEmpleados.Models.Entities.Empleado", b =>

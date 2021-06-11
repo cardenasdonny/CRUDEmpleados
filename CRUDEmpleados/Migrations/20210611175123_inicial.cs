@@ -2,7 +2,7 @@
 
 namespace CRUDEmpleados.Migrations
 {
-    public partial class ok : Migration
+    public partial class inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,8 @@ namespace CRUDEmpleados.Migrations
                     Documento = table.Column<int>(type: "int", nullable: false),
                     CargoId = table.Column<int>(type: "int", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<bool>(type: "bit", nullable: false)
+                    Estado = table.Column<bool>(type: "bit", nullable: false),
+                    RutaImagen = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,6 +42,36 @@ namespace CRUDEmpleados.Migrations
                         principalColumn: "CargoId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Cargos",
+                columns: new[] { "CargoId", "Nombre" },
+                values: new object[] { 1, "Secretaria" });
+
+            migrationBuilder.InsertData(
+                table: "Cargos",
+                columns: new[] { "CargoId", "Nombre" },
+                values: new object[] { 2, "Gerente" });
+
+            migrationBuilder.InsertData(
+                table: "Cargos",
+                columns: new[] { "CargoId", "Nombre" },
+                values: new object[] { 3, "Contador" });
+
+            migrationBuilder.InsertData(
+                table: "Empleados",
+                columns: new[] { "EmpleadoId", "CargoId", "Documento", "Estado", "NombreEmpleado", "RutaImagen", "Telefono" },
+                values: new object[] { 1, 1, 661122, true, "Luisa", null, "554433" });
+
+            migrationBuilder.InsertData(
+                table: "Empleados",
+                columns: new[] { "EmpleadoId", "CargoId", "Documento", "Estado", "NombreEmpleado", "RutaImagen", "Telefono" },
+                values: new object[] { 2, 3, 12345, true, "Juan", null, "445566" });
+
+            migrationBuilder.InsertData(
+                table: "Empleados",
+                columns: new[] { "EmpleadoId", "CargoId", "Documento", "Estado", "NombreEmpleado", "RutaImagen", "Telefono" },
+                values: new object[] { 3, 3, 229911, true, "Daniel", null, "885566" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Empleados_CargoId",
