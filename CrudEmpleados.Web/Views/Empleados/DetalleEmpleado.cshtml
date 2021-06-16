@@ -1,0 +1,56 @@
+﻿@model CRUDEmpleados.Model.Entities.Empleado
+
+@{
+    ViewData["Title"] = "Detalle";
+}
+
+<h1>Detalle</h1>
+
+<h4>Empleado</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-id="@Model.EmpleadoId">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label"><strong>Nombre: </strong> @Model.Nombre</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Documento: </strong> @Model.Documento</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Cargo: </strong>@Model.Cargo.Nombre</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Teléfono :</strong>@Model.Telefono</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"></label>
+                <br />
+                <img src="@("~/imagenes/" + Model.RutaImagen)" asp-append-version="true" class="img-fluid" />
+            </div>
+
+
+            @if (Model.Estado == true)
+            {
+                <div class="form-group">
+                    <label class="control-label"><strong>Estado :</strong>Habilitado</label>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label class="control-label"><strong>Estado: </strong>Deshabilitado</label>
+                </div>
+            }
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

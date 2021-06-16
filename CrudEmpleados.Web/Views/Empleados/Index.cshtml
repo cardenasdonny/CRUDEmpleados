@@ -1,0 +1,163 @@
+﻿@model IEnumerable<CRUDEmpleados.Model.Entities.Empleado>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Styles{
+
+}
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashboard</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Admin">Inicio</a></li>
+                    <li class="breadcrumb-item active">Empleados</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+
+
+        <br />
+        <p>
+            <a onclick="mostrarModal('@Url.Action("CrearEditarEmpleado","Empleados", "null", Context.Request.Scheme)', 'Crear Empleado')" class="btn btn-success"><i class="fas fa-user-plus"></i> Crear nuevo</a>
+        </p>
+        <table class="table" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Documento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CargoId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Nombre
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Documento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cargo.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td>
+                            @if (item.Estado == true)
+                            {
+                                <span class="badge badge-success">Habilitado</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">Deshabilitado</span>
+
+
+                            }
+
+                        </td>
+                        <td>
+                            <a onclick="mostrarModal('@Url.Action("CrearEditarEmpleado","Empleados", new {id= item.EmpleadoId}, Context.Request.Scheme)', 'Editar Empleado')" class="text-success"><i class="fas fa-user-edit"></i> Editar</a> |
+                            <a asp-action="DetalleEmpleado" asp-route-id="@item.EmpleadoId"><i class="fas fa-search-plus"></i> Detalle</a> |
+
+                            <form asp-action="EliminarEmpleado" asp-route-id="@item.EmpleadoId" class="d-inline">
+                                <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn btn-danger"><i class="fas fa-user-minus"></i>Eliminar</button>
+                            </form>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        </div>
+    </section>
+@section Scripts{
+
+    <script src="~/js/tabla.js"></script>
+
+    <script>
+
+        mostrarModal = (url, title) => {
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function (res) {
+                   
+                    $('#form-modal .modal-body').html(res)
+                    $('#form-modal .modal-title').html(title)
+                    $('#form-modal').modal('show');
+                }
+            })
+        }
+
+
+    </script>
+
+    <script>
+
+         @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarEmpleado")) { <text>
+
+                  Swal.fire({
+                    title: "Guardar empleado",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarEmpleado")) { <text>
+
+                  Swal.fire({
+                    title: "Editar empleado",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
+
+                  Swal.fire({
+                    title: "Error",
+                      icon: 'error',
+                    html: "@TempData["Mensaje"]"
+                  });
+
+                 </text>
+        }
+
+    </script>
+
+}
+
