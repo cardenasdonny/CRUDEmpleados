@@ -1,0 +1,67 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+
+
+
+@section Styles{
+
+}
+<div class="content-wrapper">
+    <div class="content">
+
+        <div class="container-fluid">
+
+            <h3 class="text-center">Aministrar Roles</h3>
+            <hr />
+
+            <div class="row">
+                <div class="col-6">
+                    <form asp-action="CrearRol" method="Post">
+                        <div class="form-group">
+                            <label>Ingrese el nombre del rol</label>
+                            <input type="text" id="rol" name="rol" class="form-control" placeholder="Nombre del rol" />
+                            <br />
+                            <input type="submit" value="Crear" class="btn btn-outline-primary btn-block" />
+                            <a asp-action="Index" class="btn btn-outline-danger btn-block">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="col-6" style="border-left:1px solid black;">
+                    <h3 class="text-center">Roles</h3>
+                    @if (Model.Count == 0)
+                    {
+                        <p>No se encontraron roles</p>
+                    }
+                    else
+                    {
+                        <table class="table">
+                            <thead class="bg-dark text-white">
+                                <tr>
+                                    <th>Rol</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var r in Model)
+                                {
+                                    <tr>
+                                        <td>@r.Name</td>
+                                        <td>
+                                            <a name="rol" id="rol" class="btn btn-outline-danger"
+                                               asp-route-rol="@r.Name"
+                                               asp-action="EliminarRol"
+                                               onclick="return confirm('Desea eliminar este rol?')">Eliminar rol</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+}

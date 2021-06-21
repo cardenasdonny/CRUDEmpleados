@@ -16,5 +16,10 @@ namespace CrudEmpleados.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult NoAutorizado()
+        {
+            return View();
+        }
     }
 }

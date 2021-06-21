@@ -1,7 +1,9 @@
 ﻿using CrudEmpleados.Model.Entities;
 using CrudEmpleados.Web.ViewModels.Usuarios;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +11,27 @@ using System.Threading.Tasks;
 
 namespace CrudEmpleados.Web.Controllers
 {
+    
     public class UsuariosController : Controller
     {
         private readonly UserManager<UsuarioIdentity> _userManager;
         private readonly SignInManager<UsuarioIdentity> _signInManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        const string SesionNombre = "_Nombre";
+   
 
-        public UsuariosController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager)
+
+        public UsuariosController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var listaUsuarios = await _userManager.Users.ToListAsync();
+            return View(listaUsuarios);
         }
 
         public IActionResult Crear() 
@@ -60,6 +69,50 @@ namespace CrudEmpleados.Web.Controllers
 
             }
             return View();
+        }
+
+        //Eliminar usuario
+
+        [HttpPost]
+        public async Task<IActionResult> Eliminar(string id) 
+        {
+            //buscamos el usuario
+            var usuario = await _userManager.FindByIdAsync(id);
+            await _userManager.DeleteAsync(usuario);
+            return RedirectToAction("Index");
+
+        }
+
+        //****************login*******
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RecordarMe, false);
+
+                if (result.Succeeded)
+                {
+                    //buscamos el usuario
+                    var usuario = await _userManager.FindByEmailAsync(loginViewModel.Email);                   
+
+                    _httpContextAccessor.HttpContext.Session.SetString(SesionNombre, usuario.Nombre);
+                    return RedirectToAction("Dashboard", "Admin");
+                }
+
+                return View();
+            }
+            else
+            {
+                return View(loginViewModel);
+            }
         }
     }
 }

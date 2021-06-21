@@ -1,5 +1,85 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model IEnumerable<CrudEmpleados.Model.Entities.UsuarioIdentity>
+@section Styles{
+
 }
+
+<!-- Content Wrapper. Contains page content -->
+
+    <!-- Content Header (Page header) -->
+ 
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <h1 class="m-0">Usuarios</h1>
+                    <p>
+                        <a asp-action="Crear" asp-controller="Usuarios">Crear nuevo usuario</a>
+                    </p>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                        <li class="breadcrumb-item active">Usuarios</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div>
+            </div><!-- /.row -->
+        
+        <!-- /.content-header -->
+        <!-- Main content -->
+        <div class="content">
+
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-11 align-self-center text-center">
+                        <table id="tabla" class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Email)
+                                    </th>
+
+                                    <th>Acciones</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var usuario in Model)
+                                {
+                                    <tr>                                        
+                                        <td>
+                                            @Html.DisplayFor(modelItem => usuario.Nombre)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => usuario.Email)
+                                        </td>
+                                        <td>
+
+                                            <a class="btn btn-success"
+                                               asp-route-usuarioId="@usuario.Id"
+                                               asp-action="Detalle" asp-controller="Roles">
+                                                Detalle
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form asp-action="eliminar" asp-route-id="@usuario.Id" method="post">
+                                                <span id=""></span>
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar el usuario?')">Eliminar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>       
+        </div>
+    </div>
+        
+    @section Scripts{
+        <script src="~/js/tabla.js"></script>
+    }

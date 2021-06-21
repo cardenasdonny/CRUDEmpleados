@@ -1,6 +1,7 @@
 ﻿using CRUDEmpleados.Model.Abstract;
 using CRUDEmpleados.Model.Entities;
 using CRUDEmpleados.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace CRUDEmpleados.Web.Controllers
 {
+    [Authorize]
     public class EmpleadosController : Controller
     {
         private readonly IEmpleadoService _empleadoService;
@@ -25,6 +27,9 @@ namespace CRUDEmpleados.Web.Controllers
             _cargoService = cargoService;
         }
 
+
+        
+        [AllowAnonymous]
         [HttpGet]
         public async Task <IActionResult> Index()
         {

@@ -2,8 +2,10 @@ using CrudEmpleados.Model.Entities;
 using CRUDEmpleados.Model.Abstract;
 using CRUDEmpleados.Model.Business;
 using CRUDEmpleados.Model.DAL;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +31,12 @@ namespace CrudEmpleados.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();        
+            services.AddControllersWithViews();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(5);//You can set Time   
+            });
 
             var conexion = Configuration["ConnectionStrings:conexion_sqlServer"];
             services.AddDbContext<AppDbContext>(options =>
@@ -37,6 +44,8 @@ namespace CrudEmpleados.Web
 
             services.AddScoped<IEmpleadoService, EmpleadoService>();
             services.AddScoped<ICargoService, CargoService>();
+
+            
 
             //configuración del password
             services.Configure<IdentityOptions>(options =>
@@ -48,8 +57,25 @@ namespace CrudEmpleados.Web
                 options.Password.RequiredLength = 4;
                 options.User.RequireUniqueEmail = true;
             });
+            //services.AddDefaultIdentity<UsuarioIdentity>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<UsuarioIdentity, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+               .AddDefaultUI()
+               .AddDefaultTokenProviders()
+               .AddEntityFrameworkStores<AppDbContext>();
 
-            services.AddDefaultIdentity<UsuarioIdentity>().AddEntityFrameworkStores<AppDbContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/Admin/NoAutorizado");
+                options.Cookie.Name = "Cookie";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(720);
+                options.LoginPath = new PathString("/Usuarios/Login");
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+            });
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+
 
         }
 
@@ -73,12 +99,13 @@ namespace CrudEmpleados.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Admin}/{action=Dashboard}/{id?}");
+                    pattern: "{controller=Usuarios}/{action=Login}/{id?}");
             });
         }
     }
