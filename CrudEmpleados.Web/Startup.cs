@@ -105,7 +105,7 @@ namespace CrudEmpleados.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Usuarios}/{action=Login}/{id?}");
+                    pattern: "{controller=Empleados}/{action=Index}/{id?}");
             });
         }
     }

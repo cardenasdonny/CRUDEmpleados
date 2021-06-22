@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CrudEmpleados.Model.Entities;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,9 +30,9 @@ namespace CRUDEmpleados.Model.Entities
 
         public bool Estado { get; set; }
 
-        public string RutaImagen { get; set; }      
+        public string RutaImagen { get; set; }
 
-        public virtual Cargo Cargo { get; set; }
+        public virtual List<EmpleadoDetalle> EmpleadoDetalle { get; set; }
 
     }
 }

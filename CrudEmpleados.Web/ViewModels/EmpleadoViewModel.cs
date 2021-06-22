@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CRUDEmpleados.Web.ViewModels
+namespace CrudEmpleados.Web.ViewModels
 {
     public class EmpleadoViewModel
     {        

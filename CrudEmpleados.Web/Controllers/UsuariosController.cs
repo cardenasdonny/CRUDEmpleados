@@ -1,4 +1,4 @@
-﻿using CrudEmpleados.Model.Entities;
+﻿using CRUDEmpleados.Model.Entities;
 using CrudEmpleados.Web.ViewModels.Usuarios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CrudEmpleados.Model.Entities;
 
 namespace CrudEmpleados.Web.Controllers
 {
@@ -114,5 +115,12 @@ namespace CrudEmpleados.Web.Controllers
                 return View(loginViewModel);
             }
         }
+
+        public async Task<IActionResult> CerrarSesion()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Usuarios");
+        }
+
     }
 }

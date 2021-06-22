@@ -9,6 +9,7 @@ namespace CrudEmpleados.Web.ViewModels.Usuarios
 {
     public class UsuarioViewModel
     {
+
         [Required(ErrorMessage = "El email es requerido")]
         [EmailAddress(ErrorMessage = "Email invalido")]
         public string Email { get; set; }

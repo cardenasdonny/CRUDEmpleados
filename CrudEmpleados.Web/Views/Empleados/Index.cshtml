@@ -65,9 +65,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Documento)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cargo.Nombre)
-                        </td>
+                        
                         <td>
                             @Html.DisplayFor(modelItem => item.Telefono)
                         </td>
@@ -85,8 +83,8 @@
 
                         </td>
                         <td>
-                            <a onclick="mostrarModal('@Url.Action("CrearEditarEmpleado","Empleados", new {id= item.EmpleadoId}, Context.Request.Scheme)', 'Editar Empleado')" class="text-success"><i class="fas fa-user-edit"></i> Editar</a> |
-                            <a asp-action="DetalleEmpleado" asp-route-id="@item.EmpleadoId"><i class="fas fa-search-plus"></i> Detalle</a> |
+                            <a onclick="mostrarModal('@Url.Action("CrearEditarEmpleado","Empleados", new {id= item.EmpleadoId}, Context.Request.Scheme)', 'Editar Empleado')" class="btn btn-success"><i class="fas fa-user-edit"></i> Editar</a> |
+                            <a onclick="mostrarModal('@Url.Action("DetalleEmpleado","Empleados", new {id= item.EmpleadoId}, Context.Request.Scheme)', 'Detalle Empleado')" class="btn btn-primary"><i class="fas fa-search-plus"></i> Detalle</a> |
 
                             <form asp-action="EliminarEmpleado" asp-route-id="@item.EmpleadoId" class="d-inline">
                                 <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn btn-danger"><i class="fas fa-user-minus"></i>Eliminar</button>

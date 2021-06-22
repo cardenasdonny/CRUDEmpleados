@@ -1,6 +1,6 @@
 ﻿using CRUDEmpleados.Model.Abstract;
 using CRUDEmpleados.Model.Entities;
-using CRUDEmpleados.Web.ViewModels;
+using CrudEmpleados.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CRUDEmpleados.Web.Controllers
 {
-    [Authorize]
+    
     public class EmpleadosController : Controller
     {
         private readonly IEmpleadoService _empleadoService;
@@ -36,6 +36,8 @@ namespace CRUDEmpleados.Web.Controllers
           
             return View(await _empleadoService.ObtenerListaTodosEmpleados());
         }
+
+        //[Authorize(Roles ="Administrador")]
 
         [HttpGet]
         public async Task<IActionResult> CrearEditarEmpleado(int id=0)
@@ -194,6 +196,7 @@ namespace CRUDEmpleados.Web.Controllers
                 return NotFound();
             }
 
+            
             return View(await _empleadoService.ObtenerEmpleadoPorId(id.Value));
         }
                 

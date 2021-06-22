@@ -1,0 +1,33 @@
+﻿@model CrudEmpleados.Web.ViewModels.Roles.RolesUsuarioViewModel
+
+
+
+<h3 class="text-center">Agregar usuario a rol</h3>
+<hr />
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <form asp-action="AsignarRolesUsuario" method="post">
+                <div class="form-group">
+                    <label>Seleccione el usuario</label>
+                    <select asp-for="UsuarioId" asp-items="@ViewBag.Usuarios" class="form-control">
+                        <option selected disabled>--Seleccione un usuario--</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Seleccione el rol</label>
+                    <select asp-for="NombreRol" asp-items="@ViewBag.Roles" class="form-control">
+                        <option selected disabled>--Select Role</option>
+                    </select>
+                </div>
+
+                <input type="submit" class="btn btn-outline-primary btn-block" value="Asignar" />
+                <a asp-action="Index" class="btn btn-outline-danger btn-block">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

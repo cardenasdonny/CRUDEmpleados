@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrudEmpleados.Model.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace CRUDEmpleados.Model.Entities
         [Key]
         public int CargoId { get; set; }
         public string Nombre { get; set; }
+
+        public virtual List<EmpleadoDetalle> EmpleadoDetalle { get; set; }
     }
 }
