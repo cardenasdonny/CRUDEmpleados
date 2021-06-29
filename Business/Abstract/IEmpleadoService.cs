@@ -13,5 +13,10 @@ namespace CRUDEmpleados.Model.Abstract
         Task<Empleado> ObtenerEmpleadoPorId(int id);
         Task EditarEmpleado(Empleado empleado);
         Task EliminarEmpleado(int id);
+
+
+
+        Task<IEnumerable<Empleado>> ObtenerListaTodosEmpleadosAsc();
+        Task<Empleado> ObtenerEmpleadoPorNombre(string nombre);
     }
 }

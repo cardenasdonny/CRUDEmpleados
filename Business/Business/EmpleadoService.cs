@@ -21,7 +21,18 @@ namespace CRUDEmpleados.Model.Business
         public async Task<IEnumerable<Empleado>> ObtenerListaTodosEmpleados()
         {
             return await _context.Empleados.OrderByDescending(i=>i.EmpleadoId).ToListAsync();
-        }        
+        }
+
+        public async Task<IEnumerable<Empleado>> ObtenerListaTodosEmpleadosAsc()
+        {
+            return await _context.Empleados.OrderBy(i => i.EmpleadoId).ToListAsync();
+        }
+
+        public async Task<Empleado> ObtenerEmpleadoPorNombre(string nombre)
+        {
+            //return await _context.Empleados.Include(x => x.Cargo).FindAsync(id);
+            return await _context.Empleados.FirstOrDefaultAsync(x => x.Nombre.Equals(nombre));
+        }
 
         public async Task<Empleado> ObtenerEmpleadoPorId(int id)
         {

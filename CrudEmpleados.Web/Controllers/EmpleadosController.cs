@@ -103,7 +103,6 @@ namespace CRUDEmpleados.Web.Controllers
                     path = Path.Combine(wwwRootPath + "/imagenes/" + empleado.RutaImagen);
                 }
 
-
                 if (id == 0)
                 {
                     try
