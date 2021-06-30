@@ -1,4 +1,4 @@
-﻿@model CrudEmpleados.Web.ViewModels.EmpleadoViewModel
+﻿@model CrudEmpleados.Business.Dtos.EmpleadoDto
 
 @{
     ViewData["Title"] = "Create";
@@ -24,11 +24,6 @@
                 <span asp-validation-for="Documento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CargoId" class="control-label"></label>
-                <select asp-items="ViewBag.ListaCargos" asp-for="CargoId" class="form-control"></select>
-                <span asp-validation-for="CargoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Telefono" class="control-label"></label>
                 <input asp-for="Telefono" class="form-control" />
                 <span asp-validation-for="Telefono" class="text-danger"></span>
@@ -40,9 +35,39 @@
                 <span asp-validation-for="Imagen" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-            </div>
+            <table class="table" id="tabla">
+                <thead>
+                    <tr>
+                        <th>Seleccionar</th>
+                        <th>Cargo</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Cargos.Count(); i++)
+                    {
+                    <tr>
+                        @Html.HiddenFor(m => m.Cargos[i].CargoId)
+                        <td>
+                            @Html.CheckBoxFor(m => m.Cargos[i].Seleccionado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.Cargos[i].Nombre)
+                        </td>
+
+                    </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+
+
+
+
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
         </form>
     </div>
 </div>

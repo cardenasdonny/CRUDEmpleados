@@ -1,4 +1,5 @@
-﻿using CRUDEmpleados.Model.Entities;
+﻿using CrudEmpleados.Business.Dtos;
+using CRUDEmpleados.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace CRUDEmpleados.Model.Abstract
 {
     public interface ICargoService
     {
-        Task<IEnumerable<Cargo>> ObtenerListaCargos();
+        List<CargoDto> ObtenerListaCargos();
+     
     }
 }

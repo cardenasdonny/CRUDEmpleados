@@ -1,15 +1,17 @@
-﻿using CrudEmpleados.Model.Entities;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CRUDEmpleados.Model.Entities
+namespace CrudEmpleados.Business.Dtos
 {
-    public class Empleado
+    public class EmpleadoDto
     {
-        [Key]
         public int EmpleadoId { get; set; }
 
         [DisplayName("Nombre completo")]
@@ -22,17 +24,22 @@ namespace CRUDEmpleados.Model.Entities
         public int Documento { get; set; }
 
         [DisplayName("Cargo")]
-        [Required(ErrorMessage = "El cargo es obligatorio")]
-        [Range(1, 10, ErrorMessage = "El cargo es requerido")]
-        public int CargoId { get; set; }
+        [Required(ErrorMessage = "El cargo es obligatorio")]   
+        public List<CargoDto> Cargos { get; set; }
 
         public string Telefono { get; set; }
 
         public bool Estado { get; set; }
 
+        public IFormFile Imagen { get; set; }
+
         public string RutaImagen { get; set; }
+    }
 
-        public virtual List<EmpleadoCargos> EmpleadoCargos { get; set; }
-
+    public class CargoDto
+    {
+        public int CargoId { get; set; }
+        public string Nombre { get; set; }
+        public bool Seleccionado { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CRUDEmpleados.Model.Entities;
+﻿using CrudEmpleados.Business.Dtos;
+using CRUDEmpleados.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,6 @@ namespace CRUDEmpleados.Model.Abstract
 
         Task<IEnumerable<Empleado>> ObtenerListaTodosEmpleadosAsc();
         Task<Empleado> ObtenerEmpleadoPorNombre(string nombre);
+        Task GuardarEmpleadoDetalleCargo(List<CargoDto> listacargoDtos);
     }
 }

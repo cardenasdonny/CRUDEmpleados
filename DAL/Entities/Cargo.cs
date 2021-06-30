@@ -13,6 +13,6 @@ namespace CRUDEmpleados.Model.Entities
         public int CargoId { get; set; }
         public string Nombre { get; set; }
 
-        public virtual List<EmpleadoDetalle> EmpleadoDetalle { get; set; }
+        public virtual List<EmpleadoCargos> EmpleadoCargos { get; set; }
     }
 }

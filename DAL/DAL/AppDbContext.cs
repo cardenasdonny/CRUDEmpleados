@@ -28,7 +28,7 @@ namespace CRUDEmpleados.Model.DAL
         public DbSet<Cargo> Cargos { get; set; }
         public DbSet<UsuarioIdentity> Usuarios { get; set; }
 
-        public DbSet<EmpleadoDetalle> EmpleadoDetalles { get; set; }
+        public DbSet<EmpleadoCargos> EmpleadoCargos { get; set; }
 
     }
 }

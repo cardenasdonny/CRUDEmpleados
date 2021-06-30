@@ -1,4 +1,5 @@
-﻿using CRUDEmpleados.Model.Abstract;
+﻿using CrudEmpleados.Business.Dtos;
+using CRUDEmpleados.Model.Abstract;
 using CRUDEmpleados.Model.DAL;
 using CRUDEmpleados.Model.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,25 @@ namespace CRUDEmpleados.Model.Business
         {
             _context = context;
         }
-
-        public async Task<IEnumerable<Cargo>> ObtenerListaCargos()
-        {
+        /*
+        public async Task<List<Cargo>> ObtenerListaCargos()
+        {            
             return await _context.Cargos.ToListAsync();
+        }
+        */
+        public List<CargoDto> ObtenerListaCargos()
+        {
+            List<CargoDto> listaCargoDtos = new();
+            _context.Cargos.ToList().ForEach(c =>
+            {
+                CargoDto cargoDto = new()
+                {
+                    CargoId = c.CargoId,
+                    Nombre = c.Nombre
+                };
+                listaCargoDtos.Add(cargoDto);
+            });
+            return listaCargoDtos;
         }
 
     }

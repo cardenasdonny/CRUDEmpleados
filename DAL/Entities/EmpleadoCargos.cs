@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CrudEmpleados.Model.Entities
 {
-    public class EmpleadoDetalle
+    public class EmpleadoCargos
     {
         [Key]
         public int EmpleadoDetalleId { get; set; }

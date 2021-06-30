@@ -1,4 +1,6 @@
-﻿using CRUDEmpleados.Model.Abstract;
+﻿using CrudEmpleados.Business.Dtos;
+using CrudEmpleados.Model.Entities;
+using CRUDEmpleados.Model.Abstract;
 using CRUDEmpleados.Model.DAL;
 using CRUDEmpleados.Model.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -59,5 +61,42 @@ namespace CRUDEmpleados.Model.Business
             await _context.SaveChangesAsync();
         }
 
-    }
+        public int ObtenerEmpleadoMaxId()
+        {
+            return _context.Empleados.Max(e => e.EmpleadoId);
+        }
+
+
+
+
+        public async Task GuardarEmpleadoDetalleCargo(List<CargoDto> listacargoDtos)
+        {            
+
+            foreach (var cargoDto in listacargoDtos)
+            {
+                int maxId = ObtenerEmpleadoMaxId();
+                if (cargoDto.Seleccionado == true)
+                {
+                    EmpleadoCargos empleadoCargos = new()
+                    {
+                        CargoId = cargoDto.CargoId,
+                        EmpleadoId = maxId
+                    };
+                    await GuardarEmpleadoDetalleCargo(empleadoCargos);
+
+                }
+                
+            }
+            
+            
+        }
+
+        public async Task GuardarEmpleadoDetalleCargo(EmpleadoCargos empleadoCargos)
+        {
+            _context.Add(empleadoCargos);
+            await _context.SaveChangesAsync();
+        }
+
+
+        }
 }
