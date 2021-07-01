@@ -1,4 +1,4 @@
-﻿@model CRUDEmpleados.Model.Entities.Empleado
+﻿@model CrudEmpleados.Business.Dtos.EmpleadoDto
 
 @{
     ViewData["Title"] = "Detalle";
@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label"><strong>Documento: </strong> @Model.Documento</label>
-            </div>            
+            </div>
             <div class="form-group">
                 <label class="control-label"><strong>Teléfono :</strong>@Model.Telefono</label>
             </div>
@@ -41,6 +41,29 @@
                     <label class="control-label"><strong>Estado: </strong>Deshabilitado</label>
                 </div>
             }
+
+            <table class="table" id="tabla">
+                <thead>
+                    <tr>                        
+                        <th>Cargo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Cargos.Count(); i++)
+                    {
+                        <tr>                           
+                           
+                            <td>
+                                @Html.DisplayFor(m => m.Cargos[i].Nombre)
+                            </td>
+
+                        </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
         </form>
     </div>
 </div>

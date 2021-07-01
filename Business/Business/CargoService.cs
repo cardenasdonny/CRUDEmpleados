@@ -38,5 +38,27 @@ namespace CRUDEmpleados.Model.Business
             return listaCargoDtos;
         }
 
+
+
+
+
+        public List<CargoDto> ObtenerListaEmpleadoCargos(int id)
+        {
+            List<CargoDto> listaEmpleadoCargoDtos = new();
+            _context.EmpleadoCargos.Include(x => x.Cargo).Where(x => x.EmpleadoId == id).ToList().ForEach(d =>
+                {
+                    CargoDto empleadoCargoDto = new()
+                    {
+                        CargoId = d.CargoId,
+                        Nombre = d.Cargo.Nombre
+                    };
+                    listaEmpleadoCargoDtos.Add(empleadoCargoDto);
+
+                }
+            );
+            
+            return listaEmpleadoCargoDtos;
+        }
+
     }
 }

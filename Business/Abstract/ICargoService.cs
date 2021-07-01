@@ -10,6 +10,9 @@ namespace CRUDEmpleados.Model.Abstract
     public interface ICargoService
     {
         List<CargoDto> ObtenerListaCargos();
-     
+        List<CargoDto> ObtenerListaEmpleadoCargos(int id);
+
+
     }
+
 }

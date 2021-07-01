@@ -247,8 +247,20 @@ namespace CRUDEmpleados.Web.Controllers
                 return NotFound();
             }
 
-            
-            return View(await _empleadoService.ObtenerEmpleadoPorId(id.Value));
+            var empleado = await _empleadoService.ObtenerEmpleadoPorId(id.Value);
+            EmpleadoDto empleadoDto = new()
+            {
+                EmpleadoId = empleado.EmpleadoId,
+                Nombre = empleado.Nombre,
+                Documento = empleado.Documento,
+                Estado = empleado.Estado,
+                RutaImagen = empleado.RutaImagen,
+                Telefono = empleado.Telefono
+            };
+
+            empleadoDto.Cargos = _cargoService.ObtenerListaEmpleadoCargos(id.Value);
+
+            return View(empleadoDto);
         }
                 
 
